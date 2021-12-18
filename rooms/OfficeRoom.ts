@@ -7,10 +7,29 @@ import PlayerUpdateNameCommand from './commands/PlayerUpdateNameCommand'
 import ComputerUpdateArrayCommand from './commands/ComputerUpdateArrayCommand'
 import ChatMessageUpdateCommand from './commands/ChatMessageUpdateCommand'
 
-export class SkyOffice extends Room<OfficeState> {
+export class OfficeRoom extends Room<OfficeState> {
   private dispatcher = new Dispatcher(this)
 
+  // constructor(options: any) {
+  //   super(options);
+  //   console.log('options', options)
+  //   this.roomName = options.mode;
+  // }
+
+
+  // requestCreate(options: any) {
+  //   console.log('request create', options.name, this.roomName, options.name === this.roomName);
+  //   return options.name === this.roomName;
+  // }
+
+  // requestJoin(options: any) {
+  //   console.log('request join', options.name, this.roomName, options.name === this.roomName);
+  //   return options.name === this.roomName;
+  // }
+
   onCreate(options: any) {
+    console.log('onCreate options ', options);
+    this.roomId = options.roomId;
     this.setState(new OfficeState())
     this.autoDispose = false
 
@@ -108,6 +127,7 @@ export class SkyOffice extends Room<OfficeState> {
   }
 
   onJoin(client: Client, options: any) {
+    console.log('onJoin options', options);
     this.state.players.set(client.sessionId, new Player())
   }
 
