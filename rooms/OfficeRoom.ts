@@ -10,23 +10,6 @@ import ChatMessageUpdateCommand from './commands/ChatMessageUpdateCommand'
 export class OfficeRoom extends Room<OfficeState> {
   private dispatcher = new Dispatcher(this)
 
-  // constructor(options: any) {
-  //   super(options);
-  //   console.log('options', options)
-  //   this.roomName = options.mode;
-  // }
-
-
-  // requestCreate(options: any) {
-  //   console.log('request create', options.name, this.roomName, options.name === this.roomName);
-  //   return options.name === this.roomName;
-  // }
-
-  // requestJoin(options: any) {
-  //   console.log('request join', options.name, this.roomName, options.name === this.roomName);
-  //   return options.name === this.roomName;
-  // }
-
   onCreateHandler(roomId: string) {
     this.roomId = roomId;
     this.setState(new OfficeState())
