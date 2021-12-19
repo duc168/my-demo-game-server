@@ -27,11 +27,13 @@ export class OfficeRoom extends Room<OfficeState> {
   //   return options.name === this.roomName;
   // }
 
-  onCreate(options: any) {
-    console.log('onCreate options ', options);
-    this.roomId = options.roomId;
+  onCreateHandler(roomId: string) {
+    this.roomId = roomId;
     this.setState(new OfficeState())
     this.autoDispose = false
+    this.setMetadata({
+      roomId
+    });
 
     // HARD-CODED: Add 5 computers in a room
     for (let i = 0; i < 5; i++) {
@@ -126,8 +128,14 @@ export class OfficeRoom extends Room<OfficeState> {
     })
   }
 
+  onCreate(options: any) {
+    // console.log('onCreate options ', options);
+    const { roomId } = options;
+    this.onCreateHandler(roomId);
+  }
+
   onJoin(client: Client, options: any) {
-    console.log('onJoin options', options);
+    // console.log('onJoin options', options);
     this.state.players.set(client.sessionId, new Player())
   }
 
